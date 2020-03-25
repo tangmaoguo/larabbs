@@ -10,6 +10,10 @@ class ImageUploadHandler{
         //获取文件后缀
         $extension = strtolower($file->getClientOriginalExtension());
 
+        if(!in_array($extension,$this->allowed_ext)){
+            return false;
+        }
+
         //拼接文件名
         $filename = $file_prefix.'_'.time().'_'.Str::random().'.'.$extension;
 
