@@ -14,7 +14,7 @@ class TopicsTableSeeder extends Seeder
         //获取所有分类id
         $category_ids = Category::all()->pluck('id')->toArray();
 
-        $topics = factory(Topic::class)->times(50)->make()->each(function ($topic, $index) use ($user_ids,$category_ids){
+        $topics = factory(Topic::class)->times(100)->make()->each(function ($topic, $index) use ($user_ids,$category_ids){
                 $topic->user_id = Arr::random($user_ids);
                 $topic->category_id = Arr::random($category_ids);
         });
