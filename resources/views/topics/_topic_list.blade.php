@@ -34,6 +34,6 @@
             @endif
         @endforeach
     </ul>
-    @else
+@else
     <div class="empty-block">暂无数据</div>
 @endif
