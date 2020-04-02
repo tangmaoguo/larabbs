@@ -18,7 +18,7 @@ class Category extends Model
     public function categories(){
 //        Cache::forget('categories');
         if(!Cache::has('categories')){
-            Cache::put('categories',$this->all()->pluck('name','id'),86400*7);
+            Cache::put('categories',$this->pluck('name','id'),86400*7);
         }
         return Cache::get('categories');
     }
