@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use Illuminate\Support\Facades\Auth;
 
+
 class TopicsController extends Controller
 {
     public function __construct()
@@ -23,8 +24,12 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
-    public function show(Topic $topic)
+    public function show(Request $request,Topic $topic)
     {
+
+        if(!empty($topic->slug) && $request->slug !== $topic->slug){
+            return redirect($topic->link(),301);
+        }
         return view('topics.show', compact('topic'));
     }
 
@@ -36,10 +41,12 @@ class TopicsController extends Controller
 
 	public function store(TopicRequest $request,Topic $topic)
 	{
+
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
         $topic->save();
-		return redirect()->route('topics.show', $topic->id)->with('message', 'Created successfully.');
+        return redirect()->to($topic->link())->with('message', 'Created successfully.');
+//		return redirect()->route('topics.show', $topic->id);
 	}
 
 	public function edit(Topic $topic)
@@ -53,8 +60,8 @@ class TopicsController extends Controller
 	{
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
-
-		return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
+        return redirect()->to($topic->link())->with('message', 'Updated successfully.');
+//		return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
 	}
 
 	public function destroy(Topic $topic)

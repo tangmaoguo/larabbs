@@ -14,6 +14,13 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'appid'=>[
+        'key'=>env('BAIDU_TRANSLATE_APPID')
+        ],
+    'baidu_translate'=>[
+        'appid' =>env('BAIDU_TRANSLATE_APPID'),
+        'key' =>env('BAIDU_TRANSLATE_KEY')
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -33,5 +33,9 @@ return [
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
     ],
+    'baidu_translate'=>[
+        'APP_ID' =>env('BAIDU_TRANSLATE_APPID'),
+        'SEC_KEY' =>env('BAIDU_TRANSLATE_KEY')
+    ]
 
 ];
