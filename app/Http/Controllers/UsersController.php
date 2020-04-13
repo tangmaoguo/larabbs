@@ -15,7 +15,10 @@ class UsersController extends Controller
 
     public function show(User $user){
         $topics = $user->topics()->recent()->paginate(5);
-        return view('users.show',compact('user','topics'));
+        //我的回复
+        $replies = $user->replies()->recent()->paginate(5);
+
+        return view('users.show',compact('user','topics','replies'));
     }
     public function edit(User $user){
         $this->authorize('update',$user);

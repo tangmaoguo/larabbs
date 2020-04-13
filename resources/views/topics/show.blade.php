@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="row">
-
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs author-info">
             <div class="card ">
                 <div class="card-body">
@@ -55,6 +54,13 @@
 
                 </div>
             </div>
+            <div class="card topic-reply mt-4">
+                <div class="card-body">
+                    @include('topics._reply_box',['topic'=>$topic])
+                    @include('topics._reply_list',['replies'=>$replies])
+                </div>
+            </div>
+
         </div>
     </div>
 

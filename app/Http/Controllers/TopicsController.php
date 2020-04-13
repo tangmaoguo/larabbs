@@ -26,11 +26,13 @@ class TopicsController extends Controller
 
     public function show(Request $request,Topic $topic)
     {
-
+        //用户回复列表
+        $replies = $topic->replies()->with('user')->get();
+//        dd($replies->toArray());
         if(!empty($topic->slug) && $request->slug !== $topic->slug){
             return redirect($topic->link(),301);
         }
-        return view('topics.showpluck', compact('topic'));
+        return view('topics.show', compact('topic','replies'));
     }
 
 	public function create(Topic $topic)

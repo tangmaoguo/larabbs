@@ -27,11 +27,15 @@
             {{--用户发布的内容--}}
             <div class="card">
                 <div class="card-body">
-                   <ul class="nav nav-tabs">
-                       <li class="nav-item"><a href="" class="nav-link active bg-transparent">Ta 的话题</a></li>
-                       <li class="nav-item"><a href="" class="nav-link">Ta 的回复</a></li>
-                   </ul>
-                    @include('users._topics',['topics'=>$topics])
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a href="{{ route('users.show',$user->id) }}" class="nav-link bg-transparent {{ active_class(if_query('tab',null)) }}">Ta 的话题</a></li>
+                        <li class="nav-item"><a href="{{ route('users.show',[$user->id,'tab'=>'replies']) }}" class="nav-link {{ active_class(if_query('tab','replies')) }}">Ta 的回复</a></li>
+                    </ul>
+                    @if(if_query('tab','replies'))
+                        @include('users._replies',['replies'=>$replies])
+                    @else
+                        @include('users._topics',['topics'=>$topics])
+                    @endif
                 </div>
             </div>
         </div>
