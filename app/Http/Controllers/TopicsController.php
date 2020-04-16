@@ -27,8 +27,7 @@ class TopicsController extends Controller
     public function show(Request $request,Topic $topic)
     {
         //用户回复列表
-        $replies = $topic->replies()->with('user')->get();
-//        dd($replies->toArray());
+        $replies = $topic->replies()->with('user')->recent()->get();
         if(!empty($topic->slug) && $request->slug !== $topic->slug){
             return redirect($topic->link(),301);
         }
@@ -43,12 +42,10 @@ class TopicsController extends Controller
 
 	public function store(TopicRequest $request,Topic $topic)
 	{
-
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
         $topic->save();
         return redirect()->to($topic->link())->with('message', 'Created successfully.');
-//		return redirect()->route('topics.show', $topic->id);
 	}
 
 	public function edit(Topic $topic)

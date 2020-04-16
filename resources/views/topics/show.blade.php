@@ -43,7 +43,7 @@
                             </a>
                             <form action="{{ route('topics.destroy', $topic->id) }}" method="post"
                                   style="display: inline-block;">
-                               @csrf
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-outline-secondary btn-sm">
                                     <i class="far fa-trash-alt"></i> 删除
@@ -56,7 +56,7 @@
             </div>
             <div class="card topic-reply mt-4">
                 <div class="card-body">
-                    @include('topics._reply_box',['topic'=>$topic])
+                    @includeWhen(Auth::check(),'topics._reply_box',['topic'=>$topic])
                     @include('topics._reply_list',['replies'=>$replies])
                 </div>
             </div>
