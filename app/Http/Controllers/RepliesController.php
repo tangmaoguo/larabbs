@@ -14,7 +14,9 @@ class RepliesController extends Controller
     {
         $this->middleware('auth');
     }
+    public function index(){
 
+    }
 	public function store(ReplyRequest $request,Reply $reply)
 	{
 
@@ -30,6 +32,8 @@ class RepliesController extends Controller
 		$this->authorize('destroy', $reply);
 		$reply->delete();
 
-		return redirect()->route('replies.index')->with('message', 'Deleted successfully.');
+		return redirect()->to($reply->topic->link())->with('success', '评论删除成功！');
 	}
+
+
 }
